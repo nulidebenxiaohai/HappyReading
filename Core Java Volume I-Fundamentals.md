@@ -96,6 +96,52 @@ Java的算数运算符有+ - * /。当参与 / 运算的两个操作数都是整
 
 注意：整数被0除以会产生一个异常，而浮点数被0除将会得到无穷大或NaN结果。
 
+#### 数学函数与常量
+
+在Math类中，包含了各种个样的数学函数。在编写不同类别的程序时，可能需要的函数也不同。
+
+想要计算一个数值的平方根，可以使用sqrt方法：
+
+double x = 4;
+
+Double y = Math.sqrt(x);
+
+System.out.println(y);//prints 2.0
+
+> println方法和sqrt方法存在微小的差异。println方法处理System.out对象。但是，Math类中的sqrt方法并不处理任何对象，这样的方法被称为静态方法。
+
+在Java中，没有幂函数，因此需要借助与Math类的pow方法。例如：
+
+double y = Math.pow(x,a);
+
+将y的值设置为x的a次幂。pow方法有两个double类型的参数，其返回结果也为double类型。
+
+Math类提供了一些常用的三角函数；
+
+Math.sin
+
+Math.cos
+
+Math.tan
+
+Math.atan
+
+Math.atan2
+
+还有指数函数以及它的反函数——自然对数以及以10为底的对数：
+
+Math.exp
+
+Math.log
+
+Math.log10
+
+最后，Java还提供了连个用于表示PI和E常量的最接近的近似值：
+
+Math.PI
+
+Math.E
+
 
 
 

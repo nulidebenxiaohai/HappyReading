@@ -291,19 +291,224 @@ s.equals(t)
 
 if (str = null)
 
+<<<<<<< HEAD
 ### 码点与代码单元
 
 Java字符串由char值序列组成。char数据类型是一个采用UTF-16编码表示Unicode码点的代码单元
+=======
+### String API
+>>>>>>> 08a138642d04fec6bc6c079f24145395be7812cc
 
+Java中的string类包含了50种方法。经常会使用到的有：
 
+- char cahrAt(int index)
 
+  返回给定位置的代码单元。除非对底层的代码单元感兴趣，否则不需要调用这个方法
 
+- int codePointAt(int index)
 
+  返回从给定位置开始的码点
 
+- int offsetByCodePoints(int startIndex, int cpCount)
 
+  返回从startIndex码点开始，cpCount个码点的码点索引
 
+- boolean empty()
 
+- boolean blank()
 
+  如果字符串为空或者由空格组成，返回true
+
+- boolean equals(Object other)
+
+  如果字符串与other相等，返回true
+
+- boolean equalsIgnoreCase(String other)
+
+  如果字符串与other相等（忽略大小写），返回true
+
+- String replace(CharSequence oldString, CharSequence newString)
+
+  返回一个新字符串。这个字符串用newString代替原始字符串中所有的oldString。可以用String或StringBuilder对象作为CharSequence参数
+
+- String substring(int beginIndex)
+
+- String substring(int beginIndex, int endIndex)
+
+  返回一个新字符串。这个字符串包含原始字符串中从beginIndex到字符串末尾或者endIndex-1的所有代码单元
+
+- String toLowerCase()
+
+- String toUpperCase()
+
+  返回一个新字符串。这个字符串将原始字符串中的大写字母改为小写，或者将原始字符串中的所有小写字母改为大写字母
+
+- String trim()
+
+- String strip()
+
+  返回一个新字符串。这个字符串将删除原始字符串头部和尾部小于等于U+0020的字符(trim)或空格(strip)
+
+- String join(CharSequence delimiter, CharSequence... elements)
+
+  返回一个新字符串，用给定的定界符链接所有元素
+
+- String repeat(int count)
+
+  返回一个字符串，将当前的字符串重复count次
+
+### 构建字符串
+
+有些时候，需要由较短的字符串构建字符串，例如，按键或来自文件中的单词。使用StringBuilder类就可以很好的解决这个问题
+
+首先构建一个空的字符串构建器：
+
+StringBuilder builder = new StringBuilder();
+
+当每次需要添加一部分内容时，就调用append方法
+
+builder.append(ch); //appends a single character
+
+builder.append(str); //appends a string
+
+在字符串构建完成时就调用toString方法，讲可以得到一个String对象，其中包含了构建器中的字符序列。
+
+String completedString = builder.toString();
+
+## 输入与输出
+
+### 读取输入
+
+首先需要构造一个与“标准输入流”System.in关联的Scanner对象
+
+Scanner in = new Scanner(System.in);
+
+> 因为输入时可见的，所以Scanner类不适用从控制台读取密码。Java6专门引入了Console类来实现这个目的。想要读取一个密码，可以使用下列代码：
+>
+> ```java
+> Console cons = System.console();
+> String username = cons.readLine("User name:");
+> char[] passwd = cons.readPassword("Password:");
+> ```
+>
+> 为安全起见，返回的密码存放在一个字符数组中，而不是字符串中。在对密码处理完成后，应该马上用一个填充值覆盖数组元素
+>
+> 采用Console对象处理输入不如采用Scanner方便。必须每次读取一行输入，而没有能够读取单个单词或数值的方法
+
+### 格式化输出
+
+例如：
+
+System.out.printf("%8.2f"，x)；
+
+会以一个字段宽度(field width)打印x：这包括8个字符，另外精度为小数点后2个字符。也就是说，这会打印一个签到的空格和7个字符，如下所示：
+
+ 3333.33
+
+每一个以%字符开始的格式说明符都用相应的参数替换。格式说明符尾部的转换符指示要格式化的数据的类型。
+
+<img src="Core Java Volume I-Fundamentals.assets/image-20211124002129012.png" alt="image-20211124002129012" style="zoom:50%;" />
+
+另外，还可以指定控制格式化输出外观的各种标志。
+
+<img src="Core Java Volume I-Fundamentals.assets/image-20211124002316881.png" alt="image-20211124002316881" style="zoom:50%;" />
+
+可以使用静态的String.format方法创建一个格式化的字符串，而不是答应输出
+
+String message = String.format("Hello, %s. Next year, you'll be %d", name. age);
+
+基于完整性的考虑，下面简略地介绍printf方法中日期与时间的格式化选项。对于新的代码，应当使用卷||第6章中介绍的Java.time包的方法。不过你可能会在遗留代码中看到Date类和相关的格式化选项。这个格式包括两个字母，以t开始，以表中的任意字母结束。例如
+
+System.out.println("%tc", new Date());
+
+<img src="Core Java Volume I-Fundamentals.assets/image-20211124003037853.png" alt="image-20211124003037853"  />
+
+![image-20211124003101750](Core Java Volume I-Fundamentals.assets/image-20211124003101750.png)
+
+printf的所有特性：
+
+![image-20211124003340715](Core Java Volume I-Fundamentals.assets/image-20211124003340715.png)
+
+### 文件输入与输出
+
+想要读取一个文件，需要构造一个Scanner对象，如图所示：
+
+Scanner in = new Scanner(Path.of("myfile.txt"), StandardCharsets.UTF_8);
+
+如果文件名中包含反斜杠符号，就要记住在每个反斜杠之前再加一个额外的反斜杠转义：
+
+```java
+"c:\\mydirectory\\myfile.txt"
+```
+
+现在，就可以利用前面介绍的任何一个Scanner方法对文件进行读取
+
+想要写入文件，就需要构造一个PrintWriter对象。在构造器(constructor)中，需要提供文件名和字符编码：
+
+PirntWriter out = new PrintWriter("myfile.txt", StandardCharsets.UTF_8);
+
+如果文件不存在，创建该文件。可以想输出到System.out一样使用print，println以及printf命令
+
+> 可以构造一个带有字符串参数的Scanner，但这个Scanner会把字符串解释为数据，而不是文件名。例如：
+>
+> ```java
+> Scanner in = new Scanner("myfile.txt");
+> ```
+>
+> 这个Scanner会将参数看作包含10个字符的数据。
+
+## 控制流程
+
+### 块作用域
+
+块(即复合语句)是指由若干条Java语句组成的语句，并用一对大括号括起来。块确定了变量的作用域。一个块可以嵌套在另一个块中。
+
+```java
+public static void main(String[] args){
+    int n;
+    ...
+    {
+        int k;
+        ...
+    }//k is only defined up to here
+}
+```
+
+### 条件语句
+
+在Java中，条件语句的形式为：
+
+if (condition) statement
+
+这里的条件必须用小括号括起来
+
+### 循环
+
+当条件为true时，while循环执行一条语句(也可以是一个块语句)。一般形式如下：
+
+while (condition) statement
+
+while循环语句在最前面检测循环条件。因此，循环体中的代码有可能一次都不执行。如果希望循环体至少执行一次，需要使用do/while循环放在最后。它的语法如下：
+
+do statement while (condition);
+
+这种循环语句先执行语句(通常是一个语句块)，然后再检测循环条件。如果为true，就重复执行语句，然后再次检测循环条件，以此类推。
+
+### 确定循环
+
+for循环语句是支持迭代的一种通用结构，由一个计数器或类似的变量控制迭代次数，每次迭代后这个变量就会更新。例如：
+
+for(int i = 1; i <= 10; i++)
+
+​    System.out.println(i);
+
+> 在循环中，检测两个浮点数是否相等需要格外小心。
+>
+> ```java
+> for (double x= 0; x != 10; x += 0.1) ...
+> ```
+>
+> 可能永远无法结束。由于舍入的误差，可能永远打不到精确的最终值。例如，在循环中，因为0.1无法精确地用二进制表示，所以，x将从9.99999999999998跳到10.09999999999998
 
 
 

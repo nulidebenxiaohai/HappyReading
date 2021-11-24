@@ -291,9 +291,9 @@ s.equals(t)
 
 if (str = null)
 
-### 
+### 码点与代码单元
 
-
+Java字符串由char值序列组成。char数据类型是一个采用UTF-16编码表示Unicode码点的代码单元
 
 
 

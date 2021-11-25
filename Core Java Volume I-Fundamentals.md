@@ -291,7 +291,13 @@ s.equals(t)
 
 if (str = null)
 
+<<<<<<< HEAD
+### 码点与代码单元
+
+Java字符串由char值序列组成。char数据类型是一个采用UTF-16编码表示Unicode码点的代码单元
+=======
 ### String API
+>>>>>>> 08a138642d04fec6bc6c079f24145395be7812cc
 
 Java中的string类包含了50种方法。经常会使用到的有：
 

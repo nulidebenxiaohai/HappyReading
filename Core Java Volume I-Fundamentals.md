@@ -506,6 +506,93 @@ for(int i = 1; i <= 10; i++)
 
 
 
+### 多重选择：switch语句
+
+在处理多个选项时，使用if/else结构显得有些笨拙。Java有一个和C/C++完全一样地switch语句。
+
+```java
+switch(choice)
+{
+    case1:
+        ...
+        break;
+    case2:
+        ...
+        break;
+    default:
+        //bad input
+        ...
+        break;
+}
+```
+
+switch语句将从与选项相匹配地case标签开始执行，直到遇到break语句，或者执行到switch语句地结束处为止。如果没有相匹配的case标签，而有default子句，就执行这个子句
+
+> 有可能触发多个case分支。如果在case分支语句的末尾没有break语句，那么就 会接着执行下一个case分支语句。这种情况相当危险，常常会引发错误。
+
+case标签可以是：
+
+- 类型是char，byte，short，或int的常量表达式
+- 枚举常量
+- 从Java7开始，case标签还可以是字符串字面量
+
+### 中断控制流程的语句
+
+尽管Java的设计者将goto作为保留字，但实际上并没有打算在语言中使用它。Java设计者在Java语言中增加了一条新的语句：带标签的break
+
+<img src="Core Java Volume I-Fundamentals.assets/image-20211125001944157.png" alt="image-20211125001944157" style="zoom: 67%;" />
+
+上面的示例说明了break语句的工作状态。注意：标签必须放在希望跳出的最外层循环之前，并且必须紧跟一个冒号
+
+如果输入有误，执行带标签的break会跳转到带标签的语句块末尾。与任何使用break语句的代码一样，然后需要检测循环是正常结束，还是由break跳出
+
+最后，还有一个continue语句。与break语句一样，它将中断正常的控制流程。continue语句将控制转移到最内层循环的首部。
+
+## 大数
+
+如果基本的整数和浮点数精度不能满足需求，那么可以使用java.math包中两个很有用的类：BigInteger和BigDecimal。这两个类可以处理包含任意长度数字序列的数值。BigInteger类实现任意精度的整数运算，BigDecimal实现任意精度的浮点数运算。
+
+使用静态的valueOf方法可以将普通的数值转换为大数：
+
+```java
+BigInteger a = BigInteger.valueOf(100);
+```
+
+遗憾的是，不能使用人们熟悉的算术运算符(如：+和*)处理大数，而需要使用大数类中的add和multiply方法。
+
+```java
+BigInteger c = a.add(b);//c = a+b
+BigInteger d = c.multiply(b.add(BigInteger.valueOf(2)));//d = c*(b+2)
+```
+
+## 数组
+
+数组存储相同类型值的序列
+
+### 声明数组
+
+数组是一种数据结构，用来存储同一类型值的集合。通过一个整型下标（index，或称索引）可以访问数组中的每一个值。
+
+声明如下：
+
+int[] a = new int[100];
+
+一旦创建了数组，就不能在改变它的长度（不过，当然可以改变单个的数组元素）。如果程序运行中需要经常扩展数组的大小，就应该使用另一种数据结构——数组列表（array list）
+
+### 访问数组元素
+
+数组元素的下标从0开始。一旦创建了数组，即可以在数组中填入元素。
+
+创建一个数字数组时，所有元素都初始化为0。boolean数组的元素都会初始化为false。对象数组的元素则会初始化为一个特殊值Null，表示这些元素还未存放任何东西。
+
+
+
+
+
+
+
+
+
 
 
 

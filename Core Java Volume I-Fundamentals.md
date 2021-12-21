@@ -589,7 +589,66 @@ int[] a = new int[100];
 
 数组元素的下标从0开始。一旦创建了数组，即可以在数组中填入元素。
 
-创建一个数字数组时，所有元素都初始化为0。boolean数组的元素都会初始化为false。对象数组的元素则会初始化为一个特殊值Null，表示这些元素还未存放任何东西。
+创建一个数字数组时，所有元素都初始化为0。boolean数组的元素都会初始化为false。对象数组的元素则会初始化为一个特殊值Null，表示这些元素还未存放任何东西。初学者对此可能有些不解。
+
+​    String[] names = new String[10];
+
+会创建一个包含10个字符串的数组，所有字符串都为null。
+
+想要获得数组中的元素个数，可以使用array.length。例如，
+
+​    
+
+```java
+for(int i = 0; i < a.length; i++){
+    System.out.println(a[i]);
+}
+```
+
+### for each 循环
+
+Java有一种功能很强的循环结构，可以用来一次处理数组（或者其他元素集合）中的每个元素，而不必考虑指定下标值。
+
+格式：
+
+​    for (variable : collection) statement
+
+它定义一个变量用于暂存集合中的每一个元素，并执行相应的语句（语句块）。collection这一集合表达式必须是一个数组或者是一个实现Iterable接口的类对象（例如ArrayList）。例如：
+
+```java
+for (int element : a){
+    Sysetm.out.println(element);
+}
+```
+
+> **注释：** for each 循环语句的循环变量将会遍历数组中的每个元素，而不是下标值
+
+
+
+### 数组拷贝
+
+在Java中，允许将一个数组变量拷贝到另一个数组变量。这时，两个变量将引用***同一个数组***：
+
+```java
+int[] luckyNumbers = smallPrimes;
+luckyNumbers[5] = 12; //now smallPrimes[5] is also 12
+```
+
+<img src="Core Java Volume I-Fundamentals.assets/image-20211221015030253.png" alt="image-20211221015030253" style="zoom: 67%;" />
+
+如果希望将一个数组的所有值拷贝到一个新的数组中去，就要使用Array类的copyOf方法：
+
+```java
+int[] copiedLuckyNumbers = Arrays.copyOf(luckyNumbers, luckyNumbers.length);
+```
+
+第2个参数是新数组的长度。这个方法通常用来增加数组的大小：
+
+```java
+luckyNumbers = Arrays.copyOf(luckyNumbers. 2*luckyNumbers.length);
+```
+
+如果数组元素是数值型，那么额外的元素将被赋值为0；如果数组元素是布尔型，则将赋值为false。相反，如果长度小于原始数组的长度，则只拷贝前面的值。
 
 
 

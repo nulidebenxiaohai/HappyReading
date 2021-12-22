@@ -650,19 +650,89 @@ luckyNumbers = Arrays.copyOf(luckyNumbers. 2*luckyNumbers.length);
 
 如果数组元素是数值型，那么额外的元素将被赋值为0；如果数组元素是布尔型，则将赋值为false。相反，如果长度小于原始数组的长度，则只拷贝前面的值。
 
+### 命令行参数
 
+每个Java应用程序都有一个带String arg[]参数的main方法。这个参数表明main方法将接受一个字符串数组，也就是命令行上指定的参数。
 
+```java
+public class Message
+{
+    public static void main(String[] args)
+    {
+        if (args.length == 0 || args[0].equals("-h"))
+            System.out.print("Hello,");
+        else if (args[0].equals("-g"))
+            System.out.print("Goodbye,");
+        for (int i = 1; i < args.length; i++)
+            System.out.print(" "+ args[i]);
+        System.out.println("!");
+    }
+}
+```
 
+如果使用下面这种形式调用这个程序：
 
+java Message -g cruel world
 
+args 数组将包含以下内容：
 
+args[0]: "-g"
 
+args[1]: "cruel"
 
+args[2]: "world"
 
+这个程序会显示下面这个消息：
 
+Goodbye, cruel world!
 
+### 数组排序
 
+想要对数值型数组进行排序，可以使用Arrays类中的sort方法：
 
+```java
+int[] a = new int[10000];
+
+...
+
+Arrays.sort(a);
+```
+
+这个方法使用了优化的快速排序（QuickSort）算法。快速排序算法对于大多数数据集合来说都是效率比较高的。Arrays类还提供了另外一些很快捷的方法。
+
+### 多维数组
+
+多维数组将使用多个下标访问数组元素，它适用于表示表格或更加复杂的排列形式。
+
+在Java中，声明一个二维数组：
+
+```java
+double[][] balances;
+```
+
+初始化：
+
+```java
+balances = new double[NYEARS][NRATES];
+```
+
+如果直到数组元素，可以不使用new，而是直接简单形式对多维数组进行初始化。
+
+```java
+int[][] magicSquare=
+{
+    {16，3，2，13}，
+    {5，10，11，8}，
+    {9，6，7，12}，
+    {4，15，14，1}
+}；
+```
+
+一旦数组初始化，就可以利用两个中括号访问各个元素，例如，
+
+```java
+balances[i][j]
+```
 
 
 

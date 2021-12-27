@@ -870,13 +870,46 @@ System.out.println(new Date());
 Date deadline = new Date();
 ```
 
-有两个部分。表达式new Data()构造了Date类型的对象，它的值是对新创建对象的一个引用。
+有两个部分。表达式new Data()构造了Date类型的对象，它的值是对新创建对象的一个引用。这个引用存储在变量deadline中。
 
+可以显式地将对象变量设置为null，指示这个对象变量目前没有引用任何对象。
 
+```java
+deadline = null；
+...
+if (deadline != null)
+    System.out.println(deadline);
+```
 
+### 4.2.2 Java类库中的LocalDate类
 
+Date类对于处理人类记录日期的日历信息并不是很有用，例如，“December 31，1999”不适合中国或希伯来的阴历来描述。
 
+类库设计者决定将保存与给时间点命名分开。所以标准Java类库分别包含了两个类：一个是表示时间点的Date类；另一个是用大家熟悉的日历表示法表示日期的LocalDate类。
 
+**将时间度量与日历分开是一种很好的面向对象设计。通常，最好使用不同的类表示不同的概念。**
+
+不要使用构造器来构造LocalDate类的对象。实际上，应当使用静态工厂方法（factory method），它会代表你调用构造器。下面的表达式：
+
+```java
+LocalDate.now()
+```
+
+可以提供年，月和日来构造对应一个特定日期的对象：
+
+LocalDate.of(1999,12,31)
+
+当然，通常我们都希望将构造的对象保存在一个对象变量中；
+
+```java
+LocalDate newYearsEve = LocalDate.of(1999,12,31);
+```
+
+一旦有了一个LocalDate对象，可以使用方法getYear, getMonthValue和getDayOfMonth得到年，月和日：
+
+```
+
+```
 
 
 

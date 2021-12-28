@@ -907,9 +907,38 @@ LocalDate newYearsEve = LocalDate.of(1999,12,31);
 
 一旦有了一个LocalDate对象，可以使用方法getYear, getMonthValue和getDayOfMonth得到年，月和日：
 
+```java
+int year = newYearEve.getYear();
+int month = newYearEve.getMonthValue();
+int day = newYearEve.getDayOfMonth();
 ```
 
+看起来似乎没有多大意义，因为这正是构造对象时使用的值。不过，有时可能有一个计算得到的日期，然后你希望调用这些方法来了解它的更多的信息。例如，plussDays方法会得到一个新的LocalDate，如果把应用这个方法称为当前对象，这个新日期对象则是距离当前对象指定天数的一个新日期：
+
+```java
+LocalDate aThousandDaysLater = newYearEve.plusDays(1000);
+year = aThousandDaysLater.getYear();
+month = aThousandDaysLater.getMonthValue();
+day = aThousandDaysLater.getDayOfMonth();
 ```
+
+LocalDate类封装了实例字段来维护所设置的日期。如果不查看源代码，就不可能知道类内部的日期表示。当然，封装的意义就在于内部表示并不重要，重要的是对外提供的方法。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

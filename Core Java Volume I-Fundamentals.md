@@ -926,13 +926,60 @@ LocalDate类封装了实例字段来维护所设置的日期。如果不查看�
 
 
 
+## 4.3 用户自定义类
 
+现在来学习如何编写复杂应用程序所需的主力类（workhorse class）。通常，这些类没有main方法，却有自己的实例字段和实例方法。想要构建一个完整的程序，会结合使用多个类，其中只有一个类有main方法。
 
+### 4.3.1 Employee类
 
+在Java中，最简单的了定义形式为：
 
+```java
+class ClassName
+{
+    field1
+    field2
+    ...
+    constructor1
+    constructor2
+    ...
+    method1
+    method2
+    ...
+}
+```
 
+### 4.3.2 多个源文件的使用
 
+一个源文件中可以包含两个类。许多程序员习惯于将每个类存放在一个单独的源文件中。例如，将Employee类存放在文件Employee.java中，将EmployrrTest类存放在文件Employee.java中。
 
+如果喜欢这样组织文件，可以有两种编译源程序的方法。一种是使用通配符调用Java编译器：
+
+javac Employee*.java
+
+这样一来，所有与通配符匹配的源文件都将被编译成类文件。或者键入以下命令：
+
+javac EmployeeTest.java
+
+使用这个方法时，并没有显式地编译Employee.java。不过，当Java编译器发现EmployeeTest.java使用了Employee类时，他会查找Employee.class文件。如果没有这个文件，就会自动地搜索Employee.java，然后，对它进行编译。更加重要地是：如果Employee.java版本较已有地Employee.class文件版本更新，Java编译器就会自动地重新编译这个文件。
+
+### 4.3.3 剖析Employee类
+
+在Employee中，包含了一个构造器和4个方法：
+
+```java
+public Employee(String n, double s, int year, int month, int day);
+public String getName();
+public double getSalary();
+public LocalDate getHireDay();
+public void raiseSalary(double byPercent);
+```
+
+这个类地所有方法都被标记为public。关键字public意味着任何类的任何方法都可以调用这些方法（共有4种访问级别）。
+
+> 可以用public标记实例字段，但是这是一种很不好的做法。public数据字段允许程序中的任何方法对其进行读取和修改，这完全破坏了封装。任何类的任何方法都可以修改public字段，从我们的经验来看，有些代码将利用这种存取权限，这是我们最不希望看到的。因此，强烈推荐将实例字段标记为private
+
+### 
 
 
 

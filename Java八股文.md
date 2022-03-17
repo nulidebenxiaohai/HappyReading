@@ -46,7 +46,7 @@
 
 - TreeMap：基于红黑树实现。**线程不同步**。
 - HashMap：基于哈希表实现。**线程不同步**。当发生Hash冲突时，采用拉链法（链表）。在JDK1.8中，当单个桶元素个数大于等于8时，链表实现改为红黑树实现；当元素个数小于6时，变回链表实现。
-- HashTable：和HashMap类似，但是它是**线程安全**的，这意味着同一时刻多个线程同时写入HashTabe不回导致数据不一致。它是遗留类，不应该去使用它，而是使用ConcurrentHashMap来支持线程安全，ConcurrentHashMap的效率会更高，因为ConcurrentHashMap引入了分段锁。？？？具体怎么实现，锁又是什么，怎么保证线程安全？？？
+- HashTable：和HashMap类似，但是它是**线程安全**的，这意味着同一时刻多个线程同时写入HashTabe不会导致数据不一致。它是遗留类，不应该去使用它，而是使用ConcurrentHashMap来支持线程安全，ConcurrentHashMap的效率会更高，因为ConcurrentHashMap引入了分段锁。？？？具体怎么实现，锁又是什么，怎么保证线程安全？？？
 
 ## 二、容器中的设计模式
 

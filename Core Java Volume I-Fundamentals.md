@@ -1012,7 +1012,109 @@ class Employee
 
 **Java程序总是采用按值调用。也就是说，方法得到的是所有参数值的一个副本。具体来讲，方法不能修改传递给它的任何参数变量的内容。**
 
+# 第五章： 继承
 
+## 5.7 反射
+
+### 5.7.1 Class 类
+
+在程序运行期间，Java运行时系统始终为所有对象维护一个*<u>运行时类型标识</u>*。这个信息会跟踪每个对象所属的类。虚拟机利用运行时类型选择要执行的正确的方法。这些信息的类名为Class。Object类中的getClass()方法会返回一个Class类型的实例。
+
+```java
+Employee e;
+Class cl = e.getClass();
+cl.getName();
+```
+
+Class对象会描述一个特定类的属性。最常用的Class方法就是getName，这个方法会返回类的名字。
+
+还可以使用静态方法forName获得类名对应的Class对象。
+
+```java
+String className = "java.util.Random";
+Class cl = Class.forName(className);
+```
+
+获得Class类对象的第三种方法是：
+
+```java
+Class cl1 = Random.class;
+Class cl2 = int.class;
+Class cl3 = Double[].class;
+```
+
+虚拟机为每个类型管理一个唯一的Class对象。因此，可以利用==运算符实现两个类对象的比较。
+
+### 5.7.4 利用反射分析类的能力
+
+在java.lang.reflect包中有三个类Field, Method和Construction分别用于描述类的字段，方法和构造器。这三个类都有一个叫做getName的方法，用来返回字段，方法或构造器的名称，
+
+Field类有一个getType方法，用来返回描述字段类型的一个对象，这个对象的类型同样是Class。Method和Constructor类有报告参数类型的方法，Method类还有一个报告返回类型的方法。
+
+Class类中的getFields，getMethods和getConstructors方法将分别返回这个类支持的公共字段，方法和构造器的数组，其中包括超类的公共成员。Class类的getDeclareFields，getDeclaremethods和getDeclaredConstructors方法将分别返回类中声明的全部字段，方法，和构造器的数组。
+
+# 第六章：接口、lambda表达式与内部类
+
+## 6.1 接口
+
+### 6.1.1 接口的概念
+
+在java程序设计语言中，接口不是类，而是对希望符合这个接口的类的一组需求。
+
+```java
+public interface Comparable{
+  int compareTo(Object other);
+}
+```
+
+这说明，任何实现Comparable接口的类都需要包含compareTo方法，这个方法有一个Object参数，并且返回一个整数。
+
+接口中的所有方法都是*<u>自动是public</u>*方法。
+
+为了实现一个接口，需要完成下面两个步骤：
+
+1. 将类声明为给定的接口
+2. 对接口中的所有方法提供定义
+
+```java
+class Employee implements Comparable
+{
+  public int comparaTo(Object otherObject){
+    Employee other = (Employee) otherObject;
+    return Double.compare(salary, other.salary);
+  }
+}
+
+```
+
+## 6.2 lambda表达式
+
+### 6.2.1 为什么引入lambda表达式
+
+lambda表达式是一个可传递的代码块，可以在以后执行一次或多次。
+
+### 6.2.2 lambda得表达形式
+
+```java
+(String first, String second)->
+{
+  if (first.length() < second.length()) return -1;
+  else if (first.length() > second.length()) return 1;
+  else return 0;
+}
+```
+
+
+
+# 第七章：异常、断言和日志
+
+# 第八章：泛型程序设计
+
+# 第九章：集合
+
+# 第十章：图形用户界面程序设计
+
+# 第十二章：并发
 
 
 

@@ -1108,6 +1108,28 @@ lambda表达式是一个可传递的代码块，可以在以后执行一次或�
 
 # 第七章：异常、断言和日志
 
+## 7.1.1 异常分类
+
+在java程序中，异常对象都是派生于Throwable类的一个类实例。
+
+<img src="C:\Users\Think\AppData\Roaming\Typora\typora-user-images\image-20220604221928250.png" alt="image-20220604221928250" style="zoom:50%;" />
+
+设计Java程序时，要重点关注Exception层次结构。这个层次结构又分解为两个分支：一只分支派生于RuntimeException；另一个分支包括其他异常。
+
+Runtime Exception异常包括如下：
+
+- 错误的强制类型转换
+- 数组访问越界
+- 访问null指针
+
+不是派生RuntimeException的异常包括
+
+- 试图超越文件末尾继续读取数据
+- 试图打开一个不存在的文件
+- 试图根据给定的字符串查找Class对象，而这个字符串表示的类不存在
+
+
+
 # 第八章：泛型程序设计
 
 # 第九章：集合
